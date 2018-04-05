@@ -1,6 +1,6 @@
-## OverTheWire - Bandit Write-Up
+# OverTheWire - Bandit Write-Up
 
-# Level 0
+## Level 0
 
 For the first level we are given the username, domain and port and asked to login via
 SSH. This is very simple. The command line syntax for this uses the ssh command, followed
@@ -22,7 +22,7 @@ exit
 
 ls lists all of the files in a directory. cat reads a file.
 
-# Level 1
+## Level 1
 
 User: bandit1
 Pass: boJ9jbbUNNfktd78OOpsqOltutMc3MY1
@@ -38,7 +38,7 @@ $ cat ./-
 CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 ```
 
-# Level 2
+## Level 2
 
 User: bandit2
 Pass: CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
@@ -54,7 +54,7 @@ $ cat "spaces in this filename"
 UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 ```
 
-# Level 3
+## Level 3
 
 User: bandit3
 Pass: UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
@@ -88,7 +88,7 @@ drwxr-xr-x 3 root    root    4.0K Dec 28 14:34 ..
 $ cat .hidden
 ```
 
-# Level 4
+## Level 4
 
 User: bandit4
 Pass: pIwrPrtPN36QITSp3EQaw936yaFoFgAB
@@ -116,6 +116,6 @@ $ cat ./-file07
 koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 ```
 
-# Level 5
+## Level 5
 User: bandit5
 Pass: koReBOKuIDDepwhWk7jZC0RTdopnAYKh
