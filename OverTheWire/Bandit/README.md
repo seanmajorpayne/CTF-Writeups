@@ -120,4 +120,94 @@ koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 User: bandit5
 Pass: koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 
+This level focuses on finding information when many files are present within many
+directories. We're given a specific size of the file and told it needs to be human
+readable.
+
+```
+$ find . -type f -size 1033c -exec ls -l -sh {} \;
+4.0K -rw-r----- 1 root bandit5 1.1K Dec 28 14:34 ./inhere/maybehere07/.file2
+$ cat ./inhere/maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+```
+
+This command finds all files in the current directory of type f (file as opposed to d for 
+directory) with the size of 1033 bytes. Then it executes ls using the output from find, 
+showing the file information with files that are in human readable format.
+
+The {} gets a list of each file found from the find command. Note that it calls ls once 
+for each file found. The \; is an escape command followed by the end of the command 
+execution from find. The escape is needed to avoid passing the character to find.
+
+## Level 6
+User: bandit6
+Pass: DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+
+This level is similar to the previous one, but the file could be anywhere on the server.
+
+```
+$ find / -type f -size 33c -group bandit6 -user bandit7 -exec ls -la -sh {} \;
+4.0K -rw-r----- 1 bandit7 bandit6 33 Dec 28 14:34 /var/lib/dpkg/info/bandit7.password
+```
+
+This time, we are searching for all the files with group bandit6 and user bandit7. We've
+changed the . after find to a / to search the whole server.
+
+## Level 7
+User: bandit7
+Pass: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+
+We are told the password for bandit8 is next to the word millionth in the file data.txt.
+The grep command is useful here, because it will return the whole line of text next to
+a searched word of our choice.
+
+```
+$ grep 'millionth' data.txt
+cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+```
+
+## Level 8
+User: bandit8
+Pass: cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+
+The password for the next level is stored in the file data.txt and is the only line of 
+text that occurs only once. So we need to find the unique line of text. There is a
+command for this, but it only works if the lines are sorted, luckily there is a
+command for that as well.
+
+```
+$ sort data.txt | uniq -u
+UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+```
+
+## Level 9
+User: bandit9
+Pass: UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+
+The password for the next level is stored in the file data.txt in one of the few human-
+readable strings, beginning with several ‘=’ characters. If we try to cat this file, we'll
+find that it returns a message about being a binary file. However, we can use the
+command strings to get human readable text out of the file.
+
+```
+$ strings data.txt | grep "="
+nfZ=
+U=R*q
+=-VW+
+========== theP`
+=uN
+\<P5J7=^
+========== password
+L='.
+L========== isA
+G&eB_=
+9T=8?
+9=!/"
+========== truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+```
+
+## Level 10
+User: bandit10
+Pass: truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
 
