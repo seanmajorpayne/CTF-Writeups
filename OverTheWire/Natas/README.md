@@ -424,7 +424,8 @@ the variable name $target_path and is only used to assign the uploaded file a ra
 However, the parameter below this is the actual file upload. For this, we change our
 filename to poof2.phpA.gif. We'll then open the hex view of Burpsuite and change the 'A'
 character (41) to a null byte (00). This will have the filter read the file as a GIF, but
-when uploaded, php will be parsed as the end of the filename.
+when uploaded, php will be parsed as the end of the filename. Note that I had to remove
+some info here for Git to format this properly, so I've left the important lines below.
 
 ```
 POST /index.php HTTP/1.1
