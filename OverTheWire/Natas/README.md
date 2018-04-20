@@ -228,6 +228,142 @@ if($key != "") {
 ```
 
 
+Submitting a word throws parameters in the URL, one of which is needle. Looking at the
+code we can see that they are making a request for the needle parameter value and
+assigning this as the $key variable. If the $key is not an empty String, then a linux
+command is executed using the passthru function. The command essentially says to search
+for a particular word ignoring the case in the file dictionary.txt. We want to modify this
+to return our password, which we know is located in /etc/natas_webpass/natas10.
+
+So we want our final command to look like
+
+```
+grep -i -v randomword /etc/natas_webpass/natas10; dictionary.txt
+```
+
+The -v inverse searches, returning everything but our search (since we don't know the
+password we are searching for). The colon will terminate our command so our desired
+file can be searched.
+Since there is no input cleansing, we can just the following into the search box.
+
+```
+-v randomword /etc/natas_webpass/natas10;
+```
+
+This returns the natas10 password in the output section.
+
+## Level 10
+
+Username: natas10
+Password: nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+
+This level is similar to the previous one, except they are now filtering out a few
+characters. However, they are not filtering out our slash character /. Even though
+we can't use the semi-colon, the grep command allows us to grep through multiple files in
+one command, so this hasn't prevented us from submitting the following
+
+```
+-v randomword /etc/natas_webpass/natas10 dictionary.txt
+```
+
+This returns the natas11 password in the output section.
+
+## Level 11
+
+Username: natas11
+Password: U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+
+We are given the prompt "Cookies are protected with XOR encryption" as well as a box to
+change the background color of the page & a link to the source code. The code is:
+
+```
+<?
+
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+
+function xor_encrypt($in) {
+    $key = '<censored>';
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+    $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+function loadData($def) {
+    global $_COOKIE;
+    $mydata = $def;
+    if(array_key_exists("data", $_COOKIE)) {
+    $tempdata = json_decode(xor_encrypt(base64_decode($_COOKIE["data"])), true);
+    if(is_array($tempdata) && array_key_exists("showpassword", $tempdata) && array_key_exists("bgcolor", $tempdata)) {
+        if (preg_match('/^#(?:[a-f\d]{6})$/i', $tempdata['bgcolor'])) {
+        $mydata['showpassword'] = $tempdata['showpassword'];
+        $mydata['bgcolor'] = $tempdata['bgcolor'];
+        }
+    }
+    }
+    return $mydata;
+}
+
+function saveData($d) {
+    setcookie("data", base64_encode(xor_encrypt(json_encode($d))));
+}
+
+$data = loadData($defaultdata);
+
+if(array_key_exists("bgcolor",$_REQUEST)) {
+    if (preg_match('/^#(?:[a-f\d]{6})$/i', $_REQUEST['bgcolor'])) {
+        $data['bgcolor'] = $_REQUEST['bgcolor'];
+    }
+}
+
+saveData($data);
+
+
+
+?>
+```
+
+Looking at this code, we can see there is a parameter showpassword, which by default
+is set to 'no.' We want to get this to 'yes.' 
+
+
+```
+Cookie: ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw%3D
+
+$json = array("showpassword"=>"no", "bgcolor"=>"#ffffff");
+$encoded = json_encode($json);
+$cookie = "ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSEV4sFxFeaAw=";
+$text = base64_decode($cookie);
+$key = '';
+for($i=0;$i<strlen($text);$i++) {
+    $key .= $text[$i] ^ $encoded[$i % strlen($encoded)];
+}
+echo $key;
+# Echos => qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq
+# So we can assume our key is qw8J since this is repeated
+# Reversing this function we get
+
+<?php
+   $key = "qw8J";
+   $json = array("showpassword"=>"yes", "bgcolor"=>"#ffffff");
+   $text = json_encode($json);
+   $outText = '';
+   for($i=0; $i<strlen($text);$i++){
+      $outText .= $text[$i] ^ $key[$i % strlen($key)];
+   }
+   echo base64_encode($outText);
+   
+# Echos ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
+# This is our new cookie
+?>
+
+```
+
 
 
 
