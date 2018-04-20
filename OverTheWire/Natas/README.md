@@ -435,6 +435,12 @@ Accept-Language: en-US,en;q=0.5
 Accept-Encoding: gzip, deflate
 Referer: http://natas13.natas.labs.overthewire.org/index.php
 
+Content-Disposition: form-data; name="filename"
+
+yzow7qgsuk.php
+
+Content-Disposition: form-data; name="uploadedfile"; filename="poof2.phpA.gif"
+
 ```
 
 
